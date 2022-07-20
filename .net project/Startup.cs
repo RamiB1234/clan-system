@@ -23,7 +23,8 @@ namespace clan_system
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            // for ASP.NET Core 3.x and later, add Runtime Razor Compilation if using anything Razor
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,7 +50,10 @@ namespace clan_system
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(
+                    name: "admin",
+                    pattern: "{controller}/{action}/{id?}",
+                    defaults: new { controller = "Home", action = "Index" });
             });
         }
     }
