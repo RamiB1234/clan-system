@@ -1,8 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace clan_system.Controllers
 {
@@ -17,5 +13,17 @@ namespace clan_system.Controllers
         {
             return View();
         }
+
+        public IActionResult Login()
+        {
+            // Should return either _LandingWithClan or _LandingWithoutClan
+            return View();
+        }
+
+        public IActionResult Contributuin()
+        {
+            return View();
+        }
+
     }
 }
