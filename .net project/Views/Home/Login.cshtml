@@ -1,5 +1,19 @@
 ﻿@{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Login page";
 }
 
-Login..
+<br />
+<h1 class="text-center">Login</h1>
+<br />
+<br />
+<div class="offset-5">
+    <form asp-action="Login" asp-controller="Account" method="post">
+        <div class="row">
+            <div class="form-group">
+                @*<div><span asp-validation-for="Email" class="text-danger"></span></div>*@
+                <input class="form-control" placeholder="Username" />
+                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            </div>
+        </div>
+    </form>
+</div>

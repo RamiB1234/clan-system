@@ -11,16 +11,16 @@ namespace clan_system.Controllers
 
         public IActionResult Index()
         {
+            // Should return either _LandingWithClan or _LandingWithoutClan
             return View();
         }
 
         public IActionResult Login()
         {
-            // Should return either _LandingWithClan or _LandingWithoutClan
             return View();
         }
 
-        public IActionResult Contributuin()
+        public IActionResult Contribution()
         {
             return View();
         }

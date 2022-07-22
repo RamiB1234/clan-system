@@ -1,5 +1,31 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Contributions";
 }
+
+<br />
+<div class="row">
+    <div class="offset-2">
+        Current contribution for the clan {ClanName}
+    </div>
+</div>
+<br />
+<br />
+<div class="row">
+    <div class="offset-3">
+        <span>Player 1: {Current Points}</span><br />
+        <span>Player 2(Left the clan): {Current Points}</span><br />
+        <span>Player 3: {Current Points}</span><br />
+        <span>Player 4: {Current Points}</span><br />
+    </div>
+</div>
+
+<div class="row">
+    <div class="offset-4">
+        <br />
+        <br />
+        <br />
+        <span>
+            <button class="btn btn-block btn-primary">Close</button>
+        </span>
+    </div>
+</div>
