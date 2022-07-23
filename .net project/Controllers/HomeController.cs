@@ -23,12 +23,17 @@ namespace clan_system.Controllers
                 return RedirectToAction("Login");
             }
 
+            /* To-Do:
+             * -Retrieve list of clans
+             * -Check if user is part of any clan
+             * -if not, display _LandingWithoutClan. Otherwise display _LandingWithClan 
+             */
+
             var model = new LandingPageViewModel()
             {
                 LoggedUserName = sessionUserName
             };
 
-            // Should return either _LandingWithClan or _LandingWithoutClan
             return View(model);
         }
 
