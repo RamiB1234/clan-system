@@ -1,4 +1,5 @@
-﻿@{
+﻿@model clan_system.Models.ViewModels.LandingPageViewModel
+@{
     ViewData["Title"] = "Home page";
 }
 
@@ -43,3 +44,9 @@ Point: {Current_Points}
 <span>
     <button class="btn btn-primary btn-lg">Show Current Contributions</button>
 </span>
+<br />
+<br />
+<br />
+<div class="container text-right">
+    Logged in as @Model.LoggedUserName
+</div>

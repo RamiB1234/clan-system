@@ -1,2 +1,4 @@
-﻿@Html.Partial("_LandingWithoutClan")
-@Html.Partial("_LandingWithClan")
+﻿@model clan_system.Models.ViewModels.LandingPageViewModel
+
+@Html.Partial("_LandingWithoutClan", @Model)
+@Html.Partial("_LandingWithClan" , @Model)

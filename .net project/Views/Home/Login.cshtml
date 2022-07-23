@@ -1,4 +1,5 @@
-﻿@{
+﻿@model clan_system.Models.Entities.User
+@{
     ViewData["Title"] = "Login page";
 }
 
@@ -7,11 +8,10 @@
 <br />
 <br />
 <div class="offset-5">
-    <form asp-action="Login" asp-controller="Account" method="post">
+    <form asp-action="Login" asp-controller="Home" method="post">
         <div class="row">
             <div class="form-group">
-                @*<div><span asp-validation-for="Email" class="text-danger"></span></div>*@
-                <input class="form-control" placeholder="Username" />
+                <input class="form-control" placeholder="Username" asp-for="@Model.UserName" />
                 <button type="submit" class="btn btn-primary btn-block">Sign In</button>
             </div>
         </div>
