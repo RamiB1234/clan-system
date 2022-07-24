@@ -50,7 +50,18 @@ namespace clan_system.Models.Services
                 clan.Users = new List<User>();
             }
 
-            clan.Users.Add(user);
+            var userInDb = clan.Users.FirstOrDefault(x => x.UserName == userName);
+
+            if (userInDb == null)
+            {
+                clan.Users.Add(user);
+            }
+            else
+            {
+                clan.Users.Remove(userInDb);
+                userInDb.InClan = true;
+                clan.Users.Add(userInDb);
+            }
 
             _clans.ReplaceOne(x => x.Id == clan.Id, clan);
         }
