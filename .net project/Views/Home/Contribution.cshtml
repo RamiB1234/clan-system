@@ -1,21 +1,29 @@
-﻿@{
+﻿@model clan_system.Models.ViewModels.ContributionViewModel
+@{
     ViewData["Title"] = "Contributions";
 }
 
 <br />
 <div class="row">
     <div class="offset-2">
-        Current contribution for the clan {ClanName}
+        Current contribution for the clan @Model.ClanName
     </div>
 </div>
 <br />
 <br />
 <div class="row">
     <div class="offset-3">
-        <span>Player 1: {Current Points}</span><br />
-        <span>Player 2(Left the clan): {Current Points}</span><br />
-        <span>Player 3: {Current Points}</span><br />
-        <span>Player 4: {Current Points}</span><br />
+        @foreach (var player in Model.ClanUsers)
+        {
+            if (player.InClan)
+            {
+                <span>@player.UserName: @player.Contribution</span><br />
+            }
+            else
+            {
+                <span>@player.UserName (Left the clan): @player.Contribution</span><br />
+            }
+        }
     </div>
 </div>
 
@@ -25,7 +33,13 @@
         <br />
         <br />
         <span>
-            <button class="btn btn-block btn-primary">Close</button>
+            <a class="btn btn-block btn-primary" asp-action="Index" asp-controller="Home">Close</a>
         </span>
     </div>
+</div>
+<br />
+<br />
+<br />
+<div class="container text-right">
+    Logged in as @Model.LoggedUserName
 </div>

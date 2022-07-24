@@ -58,6 +58,20 @@ namespace clan_system.Controllers
             return View(model);
         }
 
+        public IActionResult Contribution(string clanName)
+        {
+            var sessionUserName = HttpContext.Session.GetString("UserName");
+            var clanUsers = clanService.GetAllClanUsers(clanName);
+            var model = new ContributionViewModel()
+            {
+                LoggedUserName = sessionUserName,
+                ClanName = clanName,
+                ClanUsers = clanUsers
+            };
+
+            return View(model);
+        }
+
         public IActionResult Login()
         {
             return View();
@@ -71,11 +85,6 @@ namespace clan_system.Controllers
             HttpContext.Session.SetString("UserName", user.UserName);
 
             return RedirectToAction("Index");
-        }
-
-        public IActionResult Contribution()
-        {
-            return View();
         }
 
         public IActionResult Logout()
