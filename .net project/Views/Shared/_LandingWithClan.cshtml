@@ -26,13 +26,13 @@ Point: @Model.clan.Points
     </div>
     <div class="col-4">
         <div class="form-group">
-            <input type="text" class="form-control text-center" />
+            <input id="subtract-points" type="text" class="form-control text-center" />
             <button id="subtract-btn" class="btn btn-primary btn-block">Subtract Points</button>
         </div>
     </div>
     <div class="col-4">
         <div class="form-group">
-            <input type="text" class="form-control text-center" />
+            <input id="set-points" type="text" class="form-control text-center" />
             <button id="set-btn" class="btn btn-primary btn-block">Set Points</button>
         </div>
     </div>
@@ -83,7 +83,46 @@ Point: @Model.clan.Points
                     "clanName": clanName,
                     "points": $('#add-points').val()
                 },
-                success: function (response) {
+                success: function () {
+                    $('#add-points').val(0);
+                    location.reload();
+                },
+                error: function (xhr) {
+                    console.log(xhr);
+                },
+            })
+        });
+
+        $("#subtract-btn").click(function () {
+
+            $.ajax({
+                type: "POST",
+                url: "/Clan/SubtractPoints",
+                data: {
+                    "clanName": clanName,
+                    "points": $('#subtract-points').val()
+                },
+                success: function () {
+                    $('#subtract-points').val(0);
+                    location.reload();
+                },
+                error: function (xhr) {
+                    console.log(xhr);
+                },
+            })
+        });
+
+        $("#set-btn").click(function () {
+
+            $.ajax({
+                type: "POST",
+                url: "/Clan/SetPoints",
+                data: {
+                    "clanName": clanName,
+                    "points": $('#set-points').val()
+                },
+                success: function () {
+                    $('#set-points').val(0);
                     location.reload();
                 },
                 error: function (xhr) {

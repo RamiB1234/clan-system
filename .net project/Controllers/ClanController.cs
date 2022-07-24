@@ -39,5 +39,25 @@ namespace clan_system.Controllers
             return Ok();
 
         }
+
+        [HttpPost("/Clan/SubtractPoints")]
+        public IActionResult SubtractPoints(string clanName, int points)
+        {
+            var sessionUserName = HttpContext.Session.GetString("UserName");
+
+            clanService.SubtractPoints(points, sessionUserName, clanName);
+            return Ok();
+
+        }
+
+        [HttpPost("/Clan/SetPoints")]
+        public IActionResult SetPoints(string clanName, int points)
+        {
+            var sessionUserName = HttpContext.Session.GetString("UserName");
+
+            clanService.SetPoints(points, sessionUserName, clanName);
+            return Ok();
+
+        }
     }
 }
