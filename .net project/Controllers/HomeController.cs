@@ -36,7 +36,7 @@ namespace clan_system.Controllers
                 {
                     foreach(var user in clan.Users)
                     {
-                        if(user.UserName == sessionUserName)
+                        if(user.UserName == sessionUserName && user.InClan)
                         {
                             inClan = true;
                             userClan = clan;

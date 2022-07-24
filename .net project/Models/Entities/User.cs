@@ -10,5 +10,6 @@ namespace clan_system.Models.Entities
         public string Id { get; set; }
 
         public string UserName { get; set; }
+        public bool InClan { get; set; }
     }
 }

@@ -40,7 +40,8 @@ namespace clan_system.Models.Services
 
             var user = new User()
             {
-                UserName = userName
+                UserName = userName,
+                InClan = true
             };
 
             // Initialize array if not already initialized:
@@ -60,6 +61,10 @@ namespace clan_system.Models.Services
             var user = clan.Users.Find(x => x.UserName == userName);
 
             clan.Users.Remove(user);
+
+            user.InClan = false;
+
+            clan.Users.Add(user);
 
             _clans.ReplaceOne(x => x.Id == clan.Id, clan);
         }
