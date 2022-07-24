@@ -13,5 +13,6 @@ namespace clan_system.Models.Entities
         public bool InClan { get; set; }
 
         public int Contribution { get; set; } = 0;
+        public string SessionId { get; set; }
     }
 }

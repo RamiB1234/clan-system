@@ -15,7 +15,7 @@ namespace clan_system.Models.Services
             _users = database.GetCollection<User>("Users");
         }
 
-        public User LoginUser(string userName)
+        public User LoginUser(string userName, string sessionId)
         {
             var foundUser= _users.Find(x => x.UserName == userName).SingleOrDefault();
 
@@ -24,7 +24,8 @@ namespace clan_system.Models.Services
             {
                 var newUser = new User()
                 {
-                    UserName = userName
+                    UserName = userName,
+                    SessionId = sessionId
                 };
 
                 _users.InsertOne(newUser);
@@ -33,8 +34,18 @@ namespace clan_system.Models.Services
 
             else
             {
+                // Update sessionId of the found user:
+                foundUser.SessionId = sessionId;
+                _users.ReplaceOne(x => x.UserName == foundUser.UserName, foundUser);
+                
                 return foundUser;
             }
+        }
+
+        public bool UserHasAnotherSession(string userName, string sessionId)
+        {
+            var foundUser = _users.Find(x => x.UserName == userName).SingleOrDefault();
+            return foundUser.SessionId == sessionId ? false : true;
         }
     }
 }

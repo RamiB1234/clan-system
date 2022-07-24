@@ -1,8 +1,10 @@
 ﻿using clan_system.Models.Entities;
 using clan_system.Models.Services;
 using clan_system.Models.ViewModels;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace clan_system.Controllers
 {
@@ -80,9 +82,13 @@ namespace clan_system.Controllers
         [HttpPost]
         public IActionResult Login(User user)
         {
-            userService.LoginUser(user.UserName);
+            // For simplicity, we'll use the current timestamp as the unique sessionId for the user:
+            var sessionId = DateTime.Now.ToString();
+
+            userService.LoginUser(user.UserName, sessionId);
 
             HttpContext.Session.SetString("UserName", user.UserName);
+            HttpContext.Session.SetString("SessionId", sessionId);
 
             return RedirectToAction("Index");
         }
@@ -90,7 +96,19 @@ namespace clan_system.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Remove("UserName");
+            HttpContext.Session.Remove("SessionId");
             return RedirectToAction("Index");
+        }
+
+        [HttpGet("/Home/CheckUserSession")]
+        public IActionResult CheckUserSession()
+        {
+            var sessionUserName = HttpContext.Session.GetString("UserName");
+            var sessionId = HttpContext.Session.GetString("SessionId");
+
+            var userHasAnotherSession = userService.UserHasAnotherSession(sessionUserName, sessionId);
+            return Ok(userHasAnotherSession);
+
         }
 
     }

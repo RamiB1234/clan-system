@@ -1,0 +1,22 @@
+﻿
+
+<script>
+    $(document).ready(function () {
+        setInterval(checkSession, 3000);
+    });
+
+    function checkSession() {
+        $.ajax({
+            type: "GET",
+            url: "/Home/CheckUserSession",
+            success: function (response) {
+                if (response == true) {
+                    window.location.href = '@Url.Action("Logout","Home")'
+                }
+            },
+            error: function (xhr) {
+                console.log(xhr);
+            },
+        })
+    }
+</script>
