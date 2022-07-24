@@ -20,5 +20,14 @@ namespace clan_system.Controllers
             return Ok();
 
         }
+
+        [HttpPost("/Clan/LeaveClan")]
+        public IActionResult LeaveClan(string clanName)
+        {
+            var sessionUserName = HttpContext.Session.GetString("UserName");
+            clanService.LeaveClan(sessionUserName, clanName);
+            return Ok();
+
+        }
     }
 }

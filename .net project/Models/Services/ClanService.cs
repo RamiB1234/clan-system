@@ -53,5 +53,15 @@ namespace clan_system.Models.Services
 
             _clans.ReplaceOne(x => x.Id == clan.Id, clan);
         }
+
+        public void LeaveClan(string userName, string clanName)
+        {
+            var clan = _clans.Find(x => x.Name == clanName).SingleOrDefault();
+            var user = clan.Users.Find(x => x.UserName == userName);
+
+            clan.Users.Remove(user);
+
+            _clans.ReplaceOne(x => x.Id == clan.Id, clan);
+        }
     }
 }

@@ -6,15 +6,16 @@
 <br />
 <div class="row">
     <div class="col-4 offset-4">
-        You are a part of {clan name}
+        You are a part of @Model.clan.Name
     </div>
     <div class="col-4">
-        <button class="btn btn-primary btn-lg" style="margin-left:30px">Leave Clan</button>
+        <button class="btn btn-primary btn-lg" style="margin-left:30px" id="leave-btn" 
+                data-clanname="@Model.clan.Name">Leave Clan</button>
     </div>
 </div>
 <br />
 <br />
-Point: {Current_Points}
+Point: @Model.clan.Points
 <br />
 <br />
 <div class="row">
@@ -27,13 +28,13 @@ Point: {Current_Points}
     <div class="col-4">
         <div class="form-group">
             <input type="text" class="form-control" />
-            <button class="btn btn-primary btn-block">Add Points</button>
+            <button class="btn btn-primary btn-block">Subtract Points</button>
         </div>
     </div>
     <div class="col-4">
         <div class="form-group">
             <input type="text" class="form-control" />
-            <button class="btn btn-primary btn-block">Add Points</button>
+            <button class="btn btn-primary btn-block">Set Points</button>
         </div>
     </div>
 </div>
@@ -50,3 +51,25 @@ Point: {Current_Points}
 <div class="container text-right">
     Logged in as @Model.LoggedUserName
 </div>
+
+<script>
+    $(document).ready(function () {
+        $("#leave-btn").click(function () {
+            var clanName = $(this).data("clanname");
+
+            $.ajax({
+                type: "POST",
+                url: "/Clan/LeaveClan",
+                data: {
+                    "clanName": clanName
+                },
+                success: function (response) {
+                    location.reload();
+                },
+                error: function (xhr) {
+                    console.log(xhr);
+                },
+            })
+        });
+    });
+</script>

@@ -29,6 +29,7 @@ namespace clan_system.Controllers
 
             // Checks if user is part of any clan:
             var inClan = false;
+            Clan userClan = null;
             foreach(var clan in clanList)
             {
                 if(clan.Users != null && clan.Users.Count>0 && inClan==false)
@@ -38,6 +39,7 @@ namespace clan_system.Controllers
                         if(user.UserName == sessionUserName)
                         {
                             inClan = true;
+                            userClan = clan;
                             break;
                         }
                     }
@@ -48,7 +50,9 @@ namespace clan_system.Controllers
             {
                 LoggedUserName = sessionUserName,
                 ClanList = clanList,
-                UserInClan = inClan
+                UserInClan = inClan,
+                clan = userClan
+
             };
 
             return View(model);

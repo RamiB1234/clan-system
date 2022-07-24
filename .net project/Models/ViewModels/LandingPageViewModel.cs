@@ -8,5 +8,6 @@ namespace clan_system.Models.ViewModels
         public string LoggedUserName { get; set; }
         public List<Clan> ClanList { get; set; }
         public bool UserInClan { get; set; }
+        public Clan clan { get; set; }
     }
 }
