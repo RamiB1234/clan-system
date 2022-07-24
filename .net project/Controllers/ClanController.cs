@@ -29,5 +29,15 @@ namespace clan_system.Controllers
             return Ok();
 
         }
+
+        [HttpPost("/Clan/AddPoints")]
+        public IActionResult AddPoints(string clanName, int points)
+        {
+            var sessionUserName = HttpContext.Session.GetString("UserName");
+
+            clanService.AddPoints(points, sessionUserName, clanName);
+            return Ok();
+
+        }
     }
 }

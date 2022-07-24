@@ -78,5 +78,11 @@ namespace clan_system.Controllers
             return View();
         }
 
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("UserName");
+            return RedirectToAction("Index");
+        }
+
     }
 }

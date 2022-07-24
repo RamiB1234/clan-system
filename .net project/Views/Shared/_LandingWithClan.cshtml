@@ -9,8 +9,7 @@
         You are a part of @Model.clan.Name
     </div>
     <div class="col-4">
-        <button class="btn btn-primary btn-lg" style="margin-left:30px" id="leave-btn" 
-                data-clanname="@Model.clan.Name">Leave Clan</button>
+        <button class="btn btn-primary btn-lg" style="margin-left:30px" id="leave-btn">Leave Clan</button>
     </div>
 </div>
 <br />
@@ -21,20 +20,20 @@ Point: @Model.clan.Points
 <div class="row">
     <div class="col-4">
         <div class="form-group">
-            <input type="text" class="form-control" />
-            <button class="btn btn-primary btn-block">Add Points</button>
+            <input id="add-points" type="text" class="form-control text-center" />
+            <button id="add-btn" class="btn btn-primary btn-block">Add Points</button>
         </div>
     </div>
     <div class="col-4">
         <div class="form-group">
-            <input type="text" class="form-control" />
-            <button class="btn btn-primary btn-block">Subtract Points</button>
+            <input type="text" class="form-control text-center" />
+            <button id="subtract-btn" class="btn btn-primary btn-block">Subtract Points</button>
         </div>
     </div>
     <div class="col-4">
         <div class="form-group">
-            <input type="text" class="form-control" />
-            <button class="btn btn-primary btn-block">Set Points</button>
+            <input type="text" class="form-control text-center" />
+            <button id="set-btn" class="btn btn-primary btn-block">Set Points</button>
         </div>
     </div>
 </div>
@@ -53,15 +52,36 @@ Point: @Model.clan.Points
 </div>
 
 <script>
+
+    var clanName = "";
     $(document).ready(function () {
+        clanName = '@Model.clan.Name';
+
         $("#leave-btn").click(function () {
-            var clanName = $(this).data("clanname");
 
             $.ajax({
                 type: "POST",
                 url: "/Clan/LeaveClan",
                 data: {
                     "clanName": clanName
+                },
+                success: function (response) {
+                    location.reload();
+                },
+                error: function (xhr) {
+                    console.log(xhr);
+                },
+            })
+        });
+
+        $("#add-btn").click(function () {
+
+            $.ajax({
+                type: "POST",
+                url: "/Clan/AddPoints",
+                data: {
+                    "clanName": clanName,
+                    "points": $('#add-points').val()
                 },
                 success: function (response) {
                     location.reload();
