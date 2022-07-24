@@ -1,4 +1,10 @@
 ﻿@model clan_system.Models.ViewModels.LandingPageViewModel
 
-@Html.Partial("_LandingWithoutClan", @Model)
-@Html.Partial("_LandingWithClan" , @Model)
+@if (Model.UserInClan == true)
+{
+    @Html.Partial("_LandingWithClan", @Model)
+}
+else
+{
+    @Html.Partial("_LandingWithoutClan", @Model)
+}

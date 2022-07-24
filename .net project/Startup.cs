@@ -34,7 +34,9 @@ namespace clan_system
 
             // DI mapping:
             services.AddSingleton<IDatabaseSettings>(x => x.GetRequiredService<IOptions<DatabaseSettings>>().Value);
+            services.AddSingleton(Configuration);
             services.AddSingleton<UserService>();
+            services.AddSingleton<ClanService>();
 
             // for ASP.NET Core 3.x and later, add Runtime Razor Compilation if using anything Razor
             services.AddMvc();

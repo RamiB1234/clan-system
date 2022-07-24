@@ -1,23 +1,37 @@
 ﻿using clan_system.Models.Entities;
+using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace clan_system.Models.Services
 {
     public class ClanService
     {
         private readonly IMongoCollection<Clan> _clans;
+        private readonly IConfiguration _config;
 
-        public ClanService(IDatabaseSettings settings)
+        public ClanService(IDatabaseSettings settings, IConfiguration config)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
             _clans = database.GetCollection<Clan>("Clans");
+            _config = config;
         }
 
         public List<Clan> GetClanList()
         {
-            return _clans.Find(x => true).ToList();
+            // This method checks if clan collection is set up
+            // If not, it inserts the clan information from the config file
+
+            var clanList = _clans.Find(x => true).ToList();
+            if(clanList.Count==0)
+            {
+                clanList = _config.GetSection("ClanList").Get<List<Clan>>();
+                _clans.InsertMany(clanList);
+            }
+
+            return clanList;
         }
     }
 }

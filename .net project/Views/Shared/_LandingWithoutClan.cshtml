@@ -8,21 +8,13 @@ You are not part of a clan.
 <br />
 <br />
 <h3>Join a clan</h3>
-<div>
-    Clan 1: 0 <button class="btn btn-primary btn-lg" style="margin-left:30px">Join</button>
-</div>
-<br />
-<div>
-    Clan 2: 0 <button class="btn btn-primary btn-lg" style="margin-left:30px">Join</button>
-</div>
-<br />
-<div>
-    Clan 3: 0 <button class="btn btn-primary btn-lg" style="margin-left:30px">Join</button>
-</div>
-<br />
-<div>
-    Clan 4: 0 <button class="btn btn-primary btn-lg" style="margin-left:30px">Join</button>
-</div>
+@foreach (var clan in Model.ClanList)
+{
+    <div>
+        @clan.Name : @clan.Points <button class="btn btn-primary btn-lg" style="margin-left:30px">Join</button>
+    </div>
+    <br />
+}
 <br />
 <br />
 <br />

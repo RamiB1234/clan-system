@@ -9,10 +9,12 @@ namespace clan_system.Controllers
     public class HomeController : Controller
     {
         private readonly UserService userService;
+        private readonly ClanService clanService;
 
-        public HomeController(UserService userService)
+        public HomeController(UserService userService, ClanService clanService)
         {
             this.userService = userService;
+            this.clanService = clanService;
         }
 
         public IActionResult Index()
@@ -23,15 +25,30 @@ namespace clan_system.Controllers
                 return RedirectToAction("Login");
             }
 
-            /* To-Do:
-             * -Retrieve list of clans
-             * -Check if user is part of any clan
-             * -if not, display _LandingWithoutClan. Otherwise display _LandingWithClan 
-             */
+            var clanList= clanService.GetClanList();
+
+            // Checks if user is part of any clan:
+            var inClan = false;
+            foreach(var clan in clanList)
+            {
+                if(clan.Users != null && clan.Users.Count>0 && inClan==false)
+                {
+                    foreach(var user in clan.Users)
+                    {
+                        if(user.UserName == sessionUserName)
+                        {
+                            inClan = true;
+                            break;
+                        }
+                    }
+                }
+            }
 
             var model = new LandingPageViewModel()
             {
-                LoggedUserName = sessionUserName
+                LoggedUserName = sessionUserName,
+                ClanList = clanList,
+                UserInClan = inClan
             };
 
             return View(model);
