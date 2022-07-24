@@ -11,7 +11,8 @@ You are not part of a clan.
 @foreach (var clan in Model.ClanList)
 {
     <div>
-        @clan.Name : @clan.Points <button class="btn btn-primary btn-lg" style="margin-left:30px">Join</button>
+        @clan.Name : @clan.Points <button class="btn btn-primary btn-lg join-btn" style="margin-left:30px" 
+                                          data-clanname="@clan.Name">Join</button>
     </div>
     <br />
 }
@@ -22,3 +23,25 @@ You are not part of a clan.
 <div class="container text-right">
     Logged in as @Model.LoggedUserName
 </div>
+
+<script>
+    $(document).ready(function () {
+        $(".join-btn").click(function () {
+            var clanName = $(this).data("clanname");
+
+            $.ajax({
+                type: "POST",
+                url: "/Clan/JoinClan",
+                data: {
+                    "clanName": clanName
+                },
+                success: function (response) {
+                    alert("Joined");
+                },
+                error: function (xhr) {
+                    console.log(xhr);
+                },
+            })
+        });
+    });
+</script>

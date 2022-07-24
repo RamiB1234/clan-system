@@ -33,5 +33,25 @@ namespace clan_system.Models.Services
 
             return clanList;
         }
+
+        public void JoinClan(string userName, string clanName)
+        {
+            var clan = _clans.Find(x => x.Name == clanName).SingleOrDefault();
+
+            var user = new User()
+            {
+                UserName = userName
+            };
+
+            // Initialize array if not already initialized:
+            if(clan.Users==null)
+            {
+                clan.Users = new List<User>();
+            }
+
+            clan.Users.Add(user);
+
+            _clans.ReplaceOne(x => x.Id == clan.Id, clan);
+        }
     }
 }
