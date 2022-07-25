@@ -1,5 +1,5 @@
 # Clan System
-
+![clan-system](https://github.com/RamiB1234/clan-system/blob/master/screenshot.png?raw=true "clan-system")
 ## Introduction
 
 This is my solution to create a basic clan system. The user can login to the system and join an available clan. After that he/she can perform several operations related to the clan points. The user can also see the contribution list of other users
