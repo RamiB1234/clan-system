@@ -10,10 +10,21 @@ You are not part of a clan.
 <h3>Join a clan</h3>
 @foreach (var clan in Model.ClanList)
 {
-    <div>
-        @clan.Name : @clan.Points <button class="btn btn-primary btn-lg join-btn" style="margin-left:30px" 
-                                          data-clanname="@clan.Name">Join</button>
-    </div>
+<div>
+    @clan.Name : @clan.Points
+
+    @if (clan.Users == null || (clan.Users!=null && clan.Users.Where(x => x.InClan==true).ToList().Count < 10))
+    {
+        <button class="btn btn-primary join-btn" style="margin-left:30px"
+                data-clanname="@clan.Name">
+            Join
+        </button>
+    }
+    else
+    {
+        <span style="color:red;margin-left:33px">Full</span>
+    }
+</div>
     <br />
 }
 <br />
